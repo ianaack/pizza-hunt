@@ -3,7 +3,7 @@ const dateFormat = require("../utils/dateFormat");
 
 const ReplySchema = new Schema(
 	{
-		// set cusom id to avoid confusion with parent comment_id
+		// set custom id to avoid confusion with parent comment _id
 		replyId: {
 			type: Schema.Types.ObjectId,
 			default: () => new Types.ObjectId(),
@@ -11,11 +11,11 @@ const ReplySchema = new Schema(
 		replyBody: {
 			type: String,
 			required: true,
-			trim: true,
 		},
 		writtenBy: {
 			type: String,
 			required: true,
+			trim: true,
 		},
 		createdAt: {
 			type: Date,
@@ -34,6 +34,7 @@ const CommentSchema = new Schema(
 	{
 		writtenBy: {
 			type: String,
+			required: true,
 		},
 		commentBody: {
 			type: String,
@@ -56,7 +57,6 @@ const CommentSchema = new Schema(
 	}
 );
 
-// get total count of replies on retrieval
 CommentSchema.virtual("replyCount").get(function () {
 	return this.replies.length;
 });
